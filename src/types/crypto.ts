@@ -6,3 +6,8 @@ export interface CryptoData {
     price_change_percentage_24h: number
     image: string
 }
+
+export interface PriceHistoryPoint {
+    date: string
+    price: number
+}

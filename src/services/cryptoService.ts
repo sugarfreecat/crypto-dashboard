@@ -1,4 +1,4 @@
-import type { CryptoData } from '../types/crypto'
+import type { CryptoData, PriceHistoryPoint } from '../types/crypto'
 
 const BASE_URL = 'https://api.coingecko.com/api/v3'
 
@@ -10,4 +10,19 @@ export async function getTopCoins(): Promise<CryptoData[]> {
     }
 
     return response.json()
+}
+
+export async function getCoinPriceHistory(coindId: string): Promise<PriceHistoryPoint[]> {
+    const response = await fetch(`${BASE_URL}/coins/${coindId}/market_chart?vs_currency=usd&days=7`)
+
+    if(!response.ok) {
+        throw new Error('Failed to fetch crypto data')
+    }
+
+    const data = await response.json()
+
+    return data.prices.map(([timestamp, price]: [number, number]) => ({
+        date: new Date(timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        price,
+    }))
 }
