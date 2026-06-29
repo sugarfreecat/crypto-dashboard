@@ -22,7 +22,7 @@ export async function getCoinPriceHistory(coindId: string): Promise<PriceHistory
     const data = await response.json()
 
     return data.prices.map(([timestamp, price]: [number, number]) => ({
-        date: new Date(timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        timestamp,
         price,
     }))
 }

@@ -8,6 +8,6 @@ export interface CryptoData {
 }
 
 export interface PriceHistoryPoint {
-    date: string
+    timestamp: number
     price: number
 }
