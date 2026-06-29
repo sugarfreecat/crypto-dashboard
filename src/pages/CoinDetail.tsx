@@ -13,17 +13,26 @@ function CoinDetail() {
 
     return (
         <div className="min-h-screen bg-gray-50 p-8">
-            <Link to="/" className="text-blue-600 hover:underline mb-4 inline-block">
-                &larr; Back to Dashboard
-            </Link>
+            <div className="max-w-3xl mx-auto">
+                <Link to="/" className="text-blue-600 hover:underline mb-6 inline-flex items-center gap-1 text-sm font-medium">
+                    &larr; Back to Dashboard
+                </Link>
 
-            <h1 className="text-2xl font-bol text-gray-900 mb-4 capitalize">
-                {coinId} — 7 day price history
-            </h1>
+                <div className="bg-white rounded-xl shadow-md p-6">
+                    <h1 className="text-2xl font-bold text-gray-900 mb-1 capitalize">
+                        {coinId}
+                    </h1>
+                    <p className="text-sm text-gray-500 mb-6">7 day price history</p>
 
-            {isLoading && <p>Loading chart...</p>}
-            {error && <p className="text-red-600">Error: {error.message}</p>}
-            {history && <PriceChart data={history} />}
+                    {isLoading && (
+                        <div className="h-[300px] flex items-center justify-center">
+                            <p className="text-gray-400">Loading chart...</p>
+                        </div>
+                    )}
+                    {error && <p className="text-red-600 font-medium">Error: {error.message}</p>}
+                    {history && <PriceChart data={history} />}
+                </div>
+            </div>
         </div>
     )
 }
